@@ -19,7 +19,7 @@ import { WorkoutsModule } from './workouts/workouts.module';
       password: process.env.AWS_RDS_PASSWORD,
       database: process.env.AWS_RDS_DATABASE,
       entities: [WorkoutEntity],
-      synchronize: true,
+      synchronize: false,
     })],
   controllers: [AppController],
   providers: [AppService],

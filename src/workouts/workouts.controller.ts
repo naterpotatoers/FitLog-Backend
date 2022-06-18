@@ -20,9 +20,9 @@ export class WorkoutsController {
     return this.workoutsService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.workoutsService.findOne(id);
+  @Get(':name')
+  findAllByName(@Param('name') name: string){
+    return this.workoutsService.findAllByName(name);
   }
 
   @Patch(':id')

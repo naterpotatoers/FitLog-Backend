@@ -10,8 +10,8 @@ export class WorkoutsService {
   constructor(
     @InjectRepository(WorkoutEntity)
     private repository: Repository<WorkoutEntity>,
-  ) {}
-  
+  ) { }
+
   create(createWorkoutDto: CreateWorkoutDto) {
     const workout = new WorkoutEntity();
     workout.id = createWorkoutDto.id;
@@ -27,15 +27,31 @@ export class WorkoutsService {
   }
 
   findAll() {
-    return this.repository.find();
+    return this.repository.find({
+      order: {
+        created_at: "DESC"
+      },
+      take: 100
+    });
   }
 
-  findOne(id: string) {
+  findAllByName(name: string) {
+    return this.repository.find({
+      where: {
+        name: name
+      },
+      order: {
+        created_at: "DESC"
+      }
+    });
+  }
+
+  findOneById(id: string) {
     return this.repository.findOne(id);
   }
 
   async update(id: string, updateWorkoutDto: UpdateWorkoutDto) {
-    const workout = await this.findOne(id);
+    const workout = await this.findOneById(id);
     workout.name = updateWorkoutDto.name;
     workout.reps = updateWorkoutDto.reps;
     workout.sets = updateWorkoutDto.sets;
